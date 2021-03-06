@@ -1,10 +1,13 @@
 package workshop;
 
 import java.util.ArrayList;
-
+import java.util.Scanner;
 
 public class HotelReservation {
-    public static void main(String[] args) {
-        System.out.println("Welcome");
+    Scanner sc = new Scanner(System.in);
+    ArrayList<Hotel> hotelList = new ArrayList();
+
+    public void addHotel(Hotel hotel) {
+        hotelList.add(hotel);
     }
 }
