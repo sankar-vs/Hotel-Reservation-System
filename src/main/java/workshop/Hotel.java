@@ -4,6 +4,7 @@ public class Hotel {
     public String name;
     public int regRate;
     public int rating;
+    public int totalRate;
 
     public Hotel(String name, int rate, int rating) {
         this.name = name;
@@ -12,7 +13,7 @@ public class Hotel {
     }
 
     public String toString() {
-        return "Hotel: " + name + "  Rate: " + regRate + "  Rating: " + rating;
+        return "Hotel: " + name + "  Rate: " + totalRate + "  Rating: " + rating;
     }
 
     public String getName() {
@@ -25,5 +26,17 @@ public class Hotel {
 
     public void calculatePrice(int difference) {
         regRate = regRate * difference;
+    }
+
+    public int getWeekdayRate() {
+        return regRate;
+    }
+
+    public void setTotalRate(int rate) {
+        totalRate = rate;
+    }
+
+    public int getTotalRate() {
+        return totalRate;
     }
 }

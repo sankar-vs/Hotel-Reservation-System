@@ -26,6 +26,7 @@ public class HotelReservationTest {
         hotelReservation.addHotel(bridgewood);
         hotelReservation.addHotel(ridgewood);
         Hotel result = hotelReservation.getCheapestHotel("10-09-2020", "12-09-2020");
+        System.out.println(result);
         Assertions.assertTrue(hotelReservation.hotelList.contains(result));
     }
 }

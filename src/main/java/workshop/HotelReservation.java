@@ -14,10 +14,16 @@ public class HotelReservation {
 
     public Hotel getCheapestHotel(String startDate, String endDate) throws ParseException {
         Day day = new Day(startDate, endDate);
-        for (Hotel hotel : hotelList) { hotel.calculatePrice(day.getDifference()); }
-        Hotel cheapestPrice  = hotelList.stream()
-                        .min(Comparator.comparing(Hotel :: getPrice))
-                        .orElseThrow(NoSuchElementException::new);
+        for (Hotel hotel : hotelList) {
+            int rate = 0;
+            for (int i = 1 ; i <= day.getDifference() ; i++) {
+                rate += hotel.getWeekdayRate();
+            }
+            hotel.setTotalRate(rate);
+        }
+        Hotel cheapestPrice = hotelList.stream()
+                .min(Comparator.comparing(Hotel::getTotalRate))
+                .orElseThrow(NoSuchElementException::new);
         return cheapestPrice;
     }
 }
