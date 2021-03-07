@@ -3,3 +3,5 @@
 #### Ability to add a hotel
 ### Used Case:2
 #### Ability to find the cheapest Hotel for a given Date Range
+### Used Case:3
+#### Ability to add Weekday and Weekend rates for each Hotel

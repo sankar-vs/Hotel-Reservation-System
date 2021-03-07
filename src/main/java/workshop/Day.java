@@ -7,7 +7,7 @@ import java.util.Date;
 public class Day {
     SimpleDateFormat myFormat = new SimpleDateFormat("dd-MM-yyyy");
     int dayDifference;
-
+    //Calculates the diff between two Dates as soon as the object is created
     public Day(String first, String last) throws ParseException {
         try {
             Date dateBefore = myFormat.parse(first);
@@ -23,7 +23,7 @@ public class Day {
             e.printStackTrace();
         }
     }
-
+    //Returns the Difference between two dates
     public int getDifference() {
         return dayDifference;
     }
