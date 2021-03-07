@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
+import java.util.List;
 
 public class HotelReservationTest {
     @Test
@@ -39,5 +40,17 @@ public class HotelReservationTest {
         Assertions.assertTrue(hotelReservation.hotelList.contains(lakewood));
         Assertions.assertTrue(hotelReservation.hotelList.contains(bridgewood));
         Assertions.assertTrue(hotelReservation.hotelList.contains(ridgewood));
+    }
+    @Test
+    public void givenDates_shouldDiffWeekendAndWeekday_andReturnCheapestHotel() throws ParseException {
+        HotelReservation hotelReservation = new HotelReservation();
+        Hotel lakewood = new Hotel("Lakewood", 110, 90, 3);
+        Hotel bridgewood = new Hotel("Bridgewood", 150, 50, 4);
+        Hotel ridgewood = new Hotel("Ridgewood", 220, 150, 5);
+        hotelReservation.addHotel(lakewood);
+        hotelReservation.addHotel(bridgewood);
+        hotelReservation.addHotel(ridgewood);
+        Hotel result = hotelReservation.getCheapestHotel("2020-09-10", "2020-09-12");
+        Assertions.assertTrue(hotelReservation.hotelList.contains(result));
     }
 }
