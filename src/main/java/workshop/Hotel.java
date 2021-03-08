@@ -30,6 +30,10 @@ public class Hotel {
         return weekendRate;
     }
 
+    public int getRating() {
+        return rating;
+    }
+
     public void setTotalRate(int rate) {
         totalRate = rate;
     }
