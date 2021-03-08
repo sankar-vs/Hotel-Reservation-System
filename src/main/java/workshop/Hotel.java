@@ -17,13 +17,9 @@ public class Hotel {
         this.rewardedWeekendRate = rewardedWeekendRate;
         this.rating = rating;
     }
-
+    @Override
     public String toString() {
         return "Hotel: " + name + "  Rating: " + rating + "  Total Rate: " + totalRate;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public int getWeekdayRate() {
@@ -47,7 +43,7 @@ public class Hotel {
     }
 
     public void setTotalRate(int rate) {
-        totalRate = rate;
+        this.totalRate = rate;
     }
 
     public int getTotalRate() {

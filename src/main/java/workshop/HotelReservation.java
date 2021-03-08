@@ -41,7 +41,7 @@ public class HotelReservation {
         Hotel cheapestPrice = hotelList.stream().min(Comparator.comparing(Hotel::getTotalRate)).orElseThrow(NoSuchElementException::new);
         return cheapestPrice;
     }
-
+    //Returns Best rated cheapest hotel
     public Hotel getCheapestHotelAndBestRated() {
         int cheapestRate = getCheapestHotel().getTotalRate();
         Predicate<Hotel> isMinimum = n -> n.getTotalRate()==cheapestRate;
@@ -49,7 +49,7 @@ public class HotelReservation {
         Hotel cheapestPriceRating = list.stream().max(Comparator.comparing(Hotel::getRating)).orElseThrow(NoSuchElementException::new);
         return cheapestPriceRating;
     }
-
+    //Returns Best rated Hotel
     public Hotel getBestRatedHotel() {
         Hotel bestRatedPrice = hotelList.stream().max(Comparator.comparing(Hotel::getTotalRate)).orElseThrow(NoSuchElementException::new);
         int maxRate = bestRatedPrice.getTotalRate();
