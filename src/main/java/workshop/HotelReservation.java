@@ -14,8 +14,8 @@ public class HotelReservation {
     public void addHotel(Hotel hotel) {
         hotelList.add(hotel);
     }
-    //Returns the cheapest Hotel
-    public Hotel getCheapestHotel(String startDate, String endDate) throws ParseException {
+    //Calculate Total Price
+    public void calcTotalPrice(String startDate, String endDate) throws ParseException {
         Day day = new Day(startDate, endDate);
         for (Hotel hotel : hotelList) {
             int rate = 0;
@@ -30,6 +30,9 @@ public class HotelReservation {
             }
             hotel.setTotalRate(rate);
         }
+    }
+    //Returns the cheapest Hotel
+    public Hotel getCheapestHotel() {
         Hotel cheapestPrice = hotelList.stream()
                               .min(Comparator.comparing(Hotel::getTotalRate))
                               .orElseThrow(NoSuchElementException::new);
@@ -41,5 +44,19 @@ public class HotelReservation {
                                     .max(Comparator.comparing(Hotel::getRating))
                                     .orElseThrow(NoSuchElementException::new);
         return cheapestPriceRating;
+    }
+
+    public Hotel getBestRatedHotel() {
+        Hotel bestRatedPrice = hotelList.stream()
+                .max(Comparator.comparing(Hotel::getTotalRate))
+                .orElseThrow(NoSuchElementException::new);
+        int cheapestRate = bestRatedPrice.getTotalRate();
+        Predicate<Hotel> isMaximum = n -> n.getTotalRate()==cheapestRate;
+        List<Hotel> list = hotelList.stream().filter(isMaximum).collect(Collectors.toList());
+        //list.stream().forEach(System.out::println);
+        Hotel bestPriceRating = list.stream()
+                .max(Comparator.comparing(Hotel::getRating))
+                .orElseThrow(NoSuchElementException::new);
+        return bestPriceRating;
     }
 }

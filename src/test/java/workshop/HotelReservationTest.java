@@ -12,7 +12,7 @@ public class HotelReservationTest {
         HotelReservation hotelReservation = new HotelReservation();
         Hotel bridgewood = new Hotel("Bridgewood", 150, 50, 4);
         Assertions.assertEquals("Bridgewood", bridgewood.name);
-        Assertions.assertEquals(110, bridgewood.weekdayRate);
+        Assertions.assertEquals(150, bridgewood.weekdayRate);
         hotelReservation.addHotel(bridgewood);
         Assertions.assertTrue(hotelReservation.hotelList.contains(bridgewood));
     }
@@ -25,7 +25,8 @@ public class HotelReservationTest {
         hotelReservation.addHotel(lakewood);
         hotelReservation.addHotel(bridgewood);
         hotelReservation.addHotel(ridgewood);
-        Hotel result = hotelReservation.getCheapestHotel("10-09-2020", "12-09-2020");
+        hotelReservation.calcTotalPrice("2020-09-10", "2020-09-12");
+        Hotel result = hotelReservation.getCheapestHotel();
         Assertions.assertTrue(hotelReservation.hotelList.contains(result));
     }
     @Test
@@ -50,7 +51,8 @@ public class HotelReservationTest {
         hotelReservation.addHotel(lakewood);
         hotelReservation.addHotel(bridgewood);
         hotelReservation.addHotel(ridgewood);
-        Hotel result = hotelReservation.getCheapestHotel("2020-09-10", "2020-09-12");
+        hotelReservation.calcTotalPrice("2020-09-10", "2020-09-12");
+        Hotel result = hotelReservation.getCheapestHotel();
         Assertions.assertTrue(hotelReservation.hotelList.contains(result));
     }
 
@@ -76,7 +78,21 @@ public class HotelReservationTest {
         hotelReservation.addHotel(lakewood);
         hotelReservation.addHotel(bridgewood);
         hotelReservation.addHotel(ridgewood);
-        Hotel result = hotelReservation.getCheapestHotel("2020-09-10", "2020-09-12");
+        hotelReservation.calcTotalPrice("2020-09-10", "2020-09-12");
+        Hotel result = hotelReservation.getCheapestHotel();
+        Assertions.assertTrue(hotelReservation.hotelList.contains(result));
+    }
+    @Test
+    public void givenDateRange_shouldReturnBestRatedHotel() throws ParseException {
+        HotelReservation hotelReservation = new HotelReservation();
+        Hotel lakewood = new Hotel("Lakewood", 110, 90, 3);
+        Hotel bridgewood = new Hotel("Bridgewood", 150, 50, 4);
+        Hotel ridgewood = new Hotel("Ridgewood", 220, 150, 5);
+        hotelReservation.addHotel(lakewood);
+        hotelReservation.addHotel(bridgewood);
+        hotelReservation.addHotel(ridgewood);
+        hotelReservation.calcTotalPrice("2020-09-10", "2020-09-12");
+        Hotel result = hotelReservation.getBestRatedHotel();
         System.out.println(result);
         Assertions.assertTrue(hotelReservation.hotelList.contains(result));
     }
