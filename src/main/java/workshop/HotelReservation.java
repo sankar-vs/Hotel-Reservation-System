@@ -2,6 +2,7 @@ package workshop;
 
 import java.text.ParseException;
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -19,20 +20,14 @@ public class HotelReservation {
         Day day = new Day();
         switch (type) {
             case REGULAR:
-                for (Hotel hotel : hotelList) {
-                    int rate = 0;
-                    rate += (day.calcWeekend(startDate, endDate) * hotel.getWeekendRate());
-                    rate += (day.calcWeekday(startDate, endDate) * hotel.getWeekdayRate());
-                    hotel.setTotalRate(rate);
-                }
+                hotelList.stream().map(n -> { n.setTotalRate((day.calcWeekend(startDate, endDate) * n.getWeekendRate())
+                            + (day.calcWeekday(startDate, endDate) * n.getWeekdayRate()));
+                            return n.getTotalRate();}).collect(Collectors.toList());
                 break;
             case REWARDED:
-                for (Hotel hotel : hotelList) {
-                    int rate = 0;
-                    rate += (day.calcWeekend(startDate, endDate) * hotel.getRewardedWeekendRate());
-                    rate += (day.calcWeekday(startDate, endDate) * hotel.getRewardedWeekdayRate());
-                    hotel.setTotalRate(rate);
-                }
+                hotelList.stream().map(n -> { n.setTotalRate((day.calcWeekend(startDate, endDate) * n.getRewardedWeekendRate())
+                            + (day.calcWeekday(startDate, endDate) * n.getRewardedWeekdayRate()));
+                            return n.getTotalRate();}).collect(Collectors.toList());
                 break;
         }
     }

@@ -24,7 +24,7 @@ public class HotelReservationTest {
         hotelReservation.addHotel(lakewood);
         hotelReservation.addHotel(bridgewood);
         hotelReservation.addHotel(ridgewood);
-        hotelReservation.calcTotalPrice("2020-09-11", "2020-09-13", HotelReservation.CustomerType.REGULAR);
+        hotelReservation.calcTotalPrice("2020-09-10", "2020-09-12", HotelReservation.CustomerType.REGULAR);
         Hotel result = hotelReservation.getCheapestHotel();
         System.out.println(result);
         Assertions.assertTrue(hotelReservation.hotelList.contains(result));
@@ -80,6 +80,7 @@ public class HotelReservationTest {
         hotelReservation.addHotel(ridgewood);
         hotelReservation.calcTotalPrice("2020-09-11", "2020-09-13", HotelReservation.CustomerType.REGULAR);
         Hotel result = hotelReservation.getCheapestHotelAndBestRated();
+        System.out.println(result);
         Assertions.assertTrue(hotelReservation.hotelList.contains(result));
     }
     @Test
@@ -93,6 +94,7 @@ public class HotelReservationTest {
         hotelReservation.addHotel(ridgewood);
         hotelReservation.calcTotalPrice("2020-09-11", "2020-09-13", HotelReservation.CustomerType.REGULAR);
         Hotel result = hotelReservation.getBestRatedHotel();
+        System.out.println(result);
         Assertions.assertTrue(hotelReservation.hotelList.contains(result));
     }
     @Test
@@ -119,6 +121,7 @@ public class HotelReservationTest {
         hotelReservation.addHotel(ridgewood);
         hotelReservation.calcTotalPrice("2020-09-11", "2020-09-13", HotelReservation.CustomerType.REWARDED);
         Hotel result = hotelReservation.getCheapestHotel();
+        System.out.println(result);
         Assertions.assertTrue(hotelReservation.hotelList.contains(result));
     }
     @Test
