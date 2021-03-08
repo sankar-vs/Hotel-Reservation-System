@@ -1,42 +1,45 @@
 package workshop;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
+import java.util.EnumSet;
+import java.util.Set;
 
 public class Day {
-    SimpleDateFormat myFormat = new SimpleDateFormat("dd-MM-yyyy");
-    int dayDifference;
-    //Calculates the diff between two Dates as soon as the object is created
-    public Day(String first, String last) throws ParseException {
-        Date dateBefore = myFormat.parse(first);
-        Date dateAfter = myFormat.parse(last);
-        long difference = dateAfter.getTime() - dateBefore.getTime();
-        float daysBetween = (difference / (1000*60*60*24));
-        dayDifference = (int) daysBetween;
-    }
-    //Returns the Difference between two dates
-    public int getDifference() {
-        return dayDifference;
+    public int diffDays(String first, String last) {
+        LocalDate dateBefore = LocalDate.parse(first);
+        LocalDate dateAfter = LocalDate.parse(last);
+        return (int) ChronoUnit.DAYS.between(dateBefore,dateAfter);
     }
 
-    public boolean calcWeekdayWeekend(String first) throws ParseException {
-        Date dateBefore = myFormat.parse(first);
-        Calendar c1 = Calendar.getInstance();
-        c1.setTime(dateBefore);
-        //System.out.println(c1.get(Calendar.DAY_OF_WEEK));
-        if (c1.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY ||
-                c1.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {  //or sunday
-            //System.out.println("WEEKEND PRICE");
-            return true;
-        }else {
-            //System.out.println("WEEKDAY");
-            return false;
+    public int calcWeekend(String first, String last) {
+        int count = 0;
+        LocalDate dateBefore = LocalDate.parse(first);
+        LocalDate dateAfter = LocalDate.parse(last);
+        Set< DayOfWeek > weekend = EnumSet.of( DayOfWeek.SATURDAY , DayOfWeek.SUNDAY );
+        while ( dateBefore.isBefore( dateAfter ) ) {
+            if ( ! weekend.contains( dateBefore.getDayOfWeek() ) ) { // If weekend, count this LocalDate.
+                count++;
+            }
+            // Prepare for next loop.
+            dateBefore = dateBefore.plusDays( 1 ); // Increment to next day.
         }
+        return count;
+    }
+
+    public int calcWeekday(String first, String last) {
+        int count = 0;
+        LocalDate dateBefore = LocalDate.parse(first);
+        LocalDate dateAfter = LocalDate.parse(last);
+        Set< DayOfWeek > weekend = EnumSet.of( DayOfWeek.SATURDAY , DayOfWeek.SUNDAY );
+        while ( dateBefore.isBefore( dateAfter ) ) {
+            if ( ! weekend.contains( dateBefore.getDayOfWeek() ) ) { // If not weekend, count this LocalDate.
+                count++;
+            }
+            // Prepare for next loop.
+            dateBefore = dateBefore.plusDays( 1 ); // Increment to next day.
+        }
+        return count;
     }
 }

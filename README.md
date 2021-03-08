@@ -17,3 +17,5 @@
 #### Ability to add special rates for reward customers as a part of Loyalty Program
 ### Used Case:10
 #### Ability to find the cheapest best rated Hotel for a given Date Range for a Reward Customer
+### Used Case:11
+#### Ability to find the cheapest best rated Hotel for a given Date Range for a Reward Customer using Java Streams

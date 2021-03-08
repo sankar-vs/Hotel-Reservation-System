@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
-import java.util.List;
 
 public class HotelReservationTest {
     @Test
@@ -27,6 +26,7 @@ public class HotelReservationTest {
         hotelReservation.addHotel(ridgewood);
         hotelReservation.calcTotalPrice("2020-09-10", "2020-09-12", HotelReservation.CustomerType.REGULAR);
         Hotel result = hotelReservation.getCheapestHotel();
+        System.out.println(result);
         Assertions.assertTrue(hotelReservation.hotelList.contains(result));
     }
     @Test
@@ -53,9 +53,9 @@ public class HotelReservationTest {
         hotelReservation.addHotel(ridgewood);
         hotelReservation.calcTotalPrice("2020-09-10", "2020-09-12", HotelReservation.CustomerType.REGULAR);
         Hotel result = hotelReservation.getCheapestHotel();
+        System.out.println(result);
         Assertions.assertTrue(hotelReservation.hotelList.contains(result));
     }
-
     @Test
     public void givenRatings_shouldBeAddedToHotel() {
         HotelReservation hotelReservation = new HotelReservation();
@@ -79,7 +79,7 @@ public class HotelReservationTest {
         hotelReservation.addHotel(bridgewood);
         hotelReservation.addHotel(ridgewood);
         hotelReservation.calcTotalPrice("2020-09-10", "2020-09-12", HotelReservation.CustomerType.REGULAR);
-        Hotel result = hotelReservation.getCheapestHotel();
+        Hotel result = hotelReservation.getCheapestHotelAndBestRated();
         Assertions.assertTrue(hotelReservation.hotelList.contains(result));
     }
     @Test
