@@ -15,3 +15,5 @@
 #### Ability to find the Best Rated Hotel for a given Date Range
 ### Used Case:9
 #### Ability to add special rates for reward customers as a part of Loyalty Program
+### Used Case:10
+#### Ability to find the cheapest best rated Hotel for a given Date Range for a Reward Customer

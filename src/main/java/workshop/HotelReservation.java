@@ -8,6 +8,8 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class HotelReservation {
+    public enum CustomerType {REGULAR, REWARDED};
+    public CustomerType type;
     Scanner sc = new Scanner(System.in);
     ArrayList<Hotel> hotelList = new ArrayList();
     //Adds Hotel to hotelList
@@ -15,20 +17,39 @@ public class HotelReservation {
         hotelList.add(hotel);
     }
     //Calculate Total Price
-    public void calcTotalPrice(String startDate, String endDate) throws ParseException {
+    public void calcTotalPrice(String startDate, String endDate, CustomerType type) throws ParseException {
         Day day = new Day(startDate, endDate);
-        for (Hotel hotel : hotelList) {
-            int rate = 0;
-            LocalDate dateBefore = LocalDate.parse(startDate);
-            LocalDate dateAfter = LocalDate.parse(endDate);
-            while (!dateBefore.toString().equals(dateAfter.toString())) {
-                dateBefore = dateBefore.plusDays(1);
-                if (day.calcWeekdayWeekend(dateBefore.toString()))
-                    rate += hotel.getWeekendRate();
-                else
-                    rate += hotel.getWeekdayRate();
-            }
-            hotel.setTotalRate(rate);
+        switch (type) {
+            case REGULAR:
+                for (Hotel hotel : hotelList) {
+                    int rate = 0;
+                    LocalDate dateBefore = LocalDate.parse(startDate);
+                    LocalDate dateAfter = LocalDate.parse(endDate);
+                    while (!dateBefore.toString().equals(dateAfter.toString())) {
+                        dateBefore = dateBefore.plusDays(1);
+                        if (day.calcWeekdayWeekend(dateBefore.toString()))
+                            rate += hotel.getWeekendRate();
+                        else
+                            rate += hotel.getWeekdayRate();
+                    }
+                    hotel.setTotalRate(rate);
+                }
+                break;
+            case REWARDED:
+                for (Hotel hotel : hotelList) {
+                    int rate = 0;
+                    LocalDate dateBefore = LocalDate.parse(startDate);
+                    LocalDate dateAfter = LocalDate.parse(endDate);
+                    while (!dateBefore.toString().equals(dateAfter.toString())) {
+                        dateBefore = dateBefore.plusDays(1);
+                        if (day.calcWeekdayWeekend(dateBefore.toString()))
+                            rate += hotel.getRewardedWeekendRate();
+                        else
+                            rate += hotel.getRewardedWeekdayRate();
+                    }
+                    hotel.setTotalRate(rate);
+                }
+                break;
         }
     }
     //Returns the cheapest Hotel

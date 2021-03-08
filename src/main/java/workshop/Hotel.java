@@ -9,7 +9,6 @@ public class Hotel {
     public int rewardedWeekdayRate;
     public int rewardedWeekendRate;
 
-
     public Hotel(String name, int weekdayRate, int weekendRate, int rewardedWeekdayRate, int rewardedWeekendRate, int rating) {
         this.name = name;
         this.weekdayRate = weekdayRate;
@@ -33,6 +32,14 @@ public class Hotel {
 
     public int getWeekendRate() {
         return weekendRate;
+    }
+
+    public int getRewardedWeekdayRate() {
+        return rewardedWeekdayRate;
+    }
+
+    public int getRewardedWeekendRate() {
+        return rewardedWeekendRate;
     }
 
     public int getRating() {
