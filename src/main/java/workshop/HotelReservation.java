@@ -20,17 +20,13 @@ public class HotelReservation {
         switch (type) {
             case REGULAR:
                 for (Hotel hotel : hotelList) {
-                    int rate = 0;
-                    rate = rate + (day.calcWeekend(startDate, endDate) * hotel.getWeekendRate());
-                    rate = rate + (day.calcWeekday(startDate, endDate) * hotel.getWeekdayRate());
+                    int rate = (day.calcWeekend(startDate, endDate) * hotel.getWeekendRate()) + (day.calcWeekday(startDate, endDate) * hotel.getWeekdayRate());
                     hotel.setTotalRate(rate);
                 }
                 break;
             case REWARDED:
                 for (Hotel hotel : hotelList) {
-                    int rate = 0;
-                    rate += (day.calcWeekend(startDate, endDate) * hotel.getRewardedWeekendRate());
-                    rate += (day.calcWeekday(startDate, endDate) * hotel.getRewardedWeekdayRate());
+                    int rate = (day.calcWeekend(startDate, endDate) * hotel.getRewardedWeekendRate()) + (day.calcWeekday(startDate, endDate) * hotel.getRewardedWeekdayRate());
                     hotel.setTotalRate(rate);
                 }
                 break;
@@ -43,9 +39,8 @@ public class HotelReservation {
     }
 
     public Hotel getCheapestHotelAndBestRated() {
-        Hotel cheapestPrice = hotelList.stream().min(Comparator.comparing(Hotel::getTotalRate)).orElseThrow(NoSuchElementException::new);
-        int cheapestRate = cheapestPrice.getTotalRate();
-        Predicate<Hotel> isMinimum = n -> n.getTotalRate()==cheapestRate;
+        int cheapestRate = getCheapestHotel().getTotalRate();
+        Predicate<Hotel> isMinimum = n -> n.getTotalRate() == cheapestRate;
         List<Hotel> list = hotelList.stream().filter(isMinimum).collect(Collectors.toList());
         Hotel cheapestPriceRating = list.stream().max(Comparator.comparing(Hotel::getRating)).orElseThrow(NoSuchElementException::new);
         return cheapestPriceRating;
@@ -53,8 +48,8 @@ public class HotelReservation {
 
     public Hotel getBestRatedHotel() {
         Hotel bestRatedPrice = hotelList.stream().max(Comparator.comparing(Hotel::getTotalRate)).orElseThrow(NoSuchElementException::new);
-        int cheapestRate = bestRatedPrice.getTotalRate();
-        Predicate<Hotel> isMaximum = n -> n.getTotalRate()==cheapestRate;
+        int maxRate = bestRatedPrice.getTotalRate();
+        Predicate<Hotel> isMaximum = n -> n.getTotalRate() == maxRate;
         List<Hotel> list = hotelList.stream().filter(isMaximum).collect(Collectors.toList());
         Hotel bestPriceRating = list.stream().max(Comparator.comparing(Hotel::getRating)).orElseThrow(NoSuchElementException::new);
         return bestPriceRating;

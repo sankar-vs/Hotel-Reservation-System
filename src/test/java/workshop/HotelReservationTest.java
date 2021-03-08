@@ -24,9 +24,8 @@ public class HotelReservationTest {
         hotelReservation.addHotel(lakewood);
         hotelReservation.addHotel(bridgewood);
         hotelReservation.addHotel(ridgewood);
-        hotelReservation.calcTotalPrice("2020-09-10", "2020-09-12", HotelReservation.CustomerType.REGULAR);
+        hotelReservation.calcTotalPrice("2020-09-11", "2020-09-13", HotelReservation.CustomerType.REGULAR);
         Hotel result = hotelReservation.getCheapestHotel();
-        System.out.println(result);
         Assertions.assertTrue(hotelReservation.hotelList.contains(result));
     }
     @Test
@@ -51,9 +50,8 @@ public class HotelReservationTest {
         hotelReservation.addHotel(lakewood);
         hotelReservation.addHotel(bridgewood);
         hotelReservation.addHotel(ridgewood);
-        hotelReservation.calcTotalPrice("2020-09-10", "2020-09-12", HotelReservation.CustomerType.REGULAR);
+        hotelReservation.calcTotalPrice("2020-09-11", "2020-09-13", HotelReservation.CustomerType.REGULAR);
         Hotel result = hotelReservation.getCheapestHotel();
-        System.out.println(result);
         Assertions.assertTrue(hotelReservation.hotelList.contains(result));
     }
     @Test
@@ -78,7 +76,7 @@ public class HotelReservationTest {
         hotelReservation.addHotel(lakewood);
         hotelReservation.addHotel(bridgewood);
         hotelReservation.addHotel(ridgewood);
-        hotelReservation.calcTotalPrice("2020-09-10", "2020-09-12", HotelReservation.CustomerType.REGULAR);
+        hotelReservation.calcTotalPrice("2020-09-11", "2020-09-13", HotelReservation.CustomerType.REGULAR);
         Hotel result = hotelReservation.getCheapestHotelAndBestRated();
         Assertions.assertTrue(hotelReservation.hotelList.contains(result));
     }
@@ -91,7 +89,7 @@ public class HotelReservationTest {
         hotelReservation.addHotel(lakewood);
         hotelReservation.addHotel(bridgewood);
         hotelReservation.addHotel(ridgewood);
-        hotelReservation.calcTotalPrice("2020-09-10", "2020-09-12", HotelReservation.CustomerType.REGULAR);
+        hotelReservation.calcTotalPrice("2020-09-11", "2020-09-13", HotelReservation.CustomerType.REGULAR);
         Hotel result = hotelReservation.getBestRatedHotel();
         Assertions.assertTrue(hotelReservation.hotelList.contains(result));
     }
@@ -117,8 +115,22 @@ public class HotelReservationTest {
         hotelReservation.addHotel(lakewood);
         hotelReservation.addHotel(bridgewood);
         hotelReservation.addHotel(ridgewood);
-        hotelReservation.calcTotalPrice("2020-09-10", "2020-09-12", HotelReservation.CustomerType.REWARDED);
+        hotelReservation.calcTotalPrice("2020-09-11", "2020-09-13", HotelReservation.CustomerType.REWARDED);
         Hotel result = hotelReservation.getCheapestHotel();
+        Assertions.assertTrue(hotelReservation.hotelList.contains(result));
+    }
+    @Test
+    public void givenDateRangeForRewardedCust_shouldReturnCheapestBestRatedHotel() throws ParseException {
+        HotelReservation hotelReservation = new HotelReservation();
+        Hotel lakewood = new Hotel("Lakewood", 110, 90, 80,80,3);
+        Hotel bridgewood = new Hotel("Bridgewood", 150, 50, 110,50,4);
+        Hotel ridgewood = new Hotel("Ridgewood", 220, 150, 100,40,5);
+        hotelReservation.addHotel(lakewood);
+        hotelReservation.addHotel(bridgewood);
+        hotelReservation.addHotel(ridgewood);
+        hotelReservation.calcTotalPrice("2020-09-11", "2020-09-13", HotelReservation.CustomerType.REWARDED);
+        Hotel result = hotelReservation.getCheapestHotelAndBestRated();
+        System.out.println(result);
         Assertions.assertTrue(hotelReservation.hotelList.contains(result));
     }
 }

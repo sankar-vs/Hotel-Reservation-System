@@ -12,32 +12,30 @@ public class Day {
         LocalDate dateAfter = LocalDate.parse(last);
         return (int) ChronoUnit.DAYS.between(dateBefore,dateAfter);
     }
-
+    //Returns total number of weekends
     public int calcWeekend(String first, String last) {
         int count = 0;
         LocalDate dateBefore = LocalDate.parse(first);
         LocalDate dateAfter = LocalDate.parse(last);
         Set< DayOfWeek > weekend = EnumSet.of( DayOfWeek.SATURDAY , DayOfWeek.SUNDAY );
         while ( dateBefore.isBefore( dateAfter ) ) {
-            if ( ! weekend.contains( dateBefore.getDayOfWeek() ) ) { // If weekend, count this LocalDate.
+            if ( weekend.contains( dateBefore.getDayOfWeek() ) ) { // If weekend, count this LocalDate.
                 count++;
             }
-            // Prepare for next loop.
             dateBefore = dateBefore.plusDays( 1 ); // Increment to next day.
         }
         return count;
     }
-
+    //Returns total number of weekdays
     public int calcWeekday(String first, String last) {
         int count = 0;
         LocalDate dateBefore = LocalDate.parse(first);
         LocalDate dateAfter = LocalDate.parse(last);
-        Set< DayOfWeek > weekend = EnumSet.of( DayOfWeek.SATURDAY , DayOfWeek.SUNDAY );
+        Set< DayOfWeek > weekday = EnumSet.of( DayOfWeek.MONDAY , DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY , DayOfWeek.FRIDAY );
         while ( dateBefore.isBefore( dateAfter ) ) {
-            if ( ! weekend.contains( dateBefore.getDayOfWeek() ) ) { // If not weekend, count this LocalDate.
+            if ( weekday.contains( dateBefore.getDayOfWeek() ) ) { // If not weekday, count this LocalDate.
                 count++;
             }
-            // Prepare for next loop.
             dateBefore = dateBefore.plusDays( 1 ); // Increment to next day.
         }
         return count;
