@@ -19,3 +19,5 @@
 #### Ability to find the cheapest best rated Hotel for a given Date Range for a Reward Customer
 ### Used Case:11
 #### Ability to find the cheapest best rated Hotel for a given Date Range for a Reward Customer using Java Streams
+### Used Case:12
+#### Ability to find the cheapest best rated Hotel for a given Date Range for a Regular Customer using Java Streams

@@ -21,8 +21,8 @@ public class HotelReservation {
             case REGULAR:
                 for (Hotel hotel : hotelList) {
                     int rate = 0;
-                    rate = rate + (day.calcWeekend(startDate, endDate) * hotel.getWeekendRate());
-                    rate = rate + (day.calcWeekday(startDate, endDate) * hotel.getWeekdayRate());
+                    rate += (day.calcWeekend(startDate, endDate) * hotel.getWeekendRate());
+                    rate += (day.calcWeekday(startDate, endDate) * hotel.getWeekdayRate());
                     hotel.setTotalRate(rate);
                 }
                 break;
