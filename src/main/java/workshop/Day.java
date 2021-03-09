@@ -7,6 +7,7 @@ import java.util.EnumSet;
 import java.util.Set;
 
 public class Day {
+    //Returns the difference between two dates
     public int diffDays(String first, String last) {
         LocalDate dateBefore = LocalDate.parse(first);
         LocalDate dateAfter = LocalDate.parse(last);
